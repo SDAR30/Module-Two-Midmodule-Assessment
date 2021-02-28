@@ -1,14 +1,29 @@
 
 const diceImages = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
-
+let totalDiceRolls = 0;
 
 const rollDice = document.querySelector("#dice-form");
 const dicePara = document.querySelector("#dice-para");
 const sumPara = document.querySelector("#sum-para");
 
 
+const addToHistory = () => {
+    let li = document.createElement("li")
+
+    li.textContent = dicePara.textContent + "=" + sumPara.textContent.slice(5);
+    let list = document.querySelector("#history-list")
+    list.appendChild(li)
+}
+
+
 rollDice.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    if (totalDiceRolls > 0) {
+        addToHistory();
+    }
+
+    totalDiceRolls++;
     const diceInput = document.querySelector("#dice-input").valueAsNumber;
     let nums = []
     let total = 0;
